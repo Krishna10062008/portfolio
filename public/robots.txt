@@ -1,0 +1,9 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Private webhook/WhatsApp redirection endpoints
+Disallow: /hire
+Disallow: /api/
+
+Sitemap: https://krishna-patel.vercel.app/sitemap.xml

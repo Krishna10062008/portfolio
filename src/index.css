@@ -1,0 +1,245 @@
+@import "tailwindcss";
+@import "@fontsource/anton";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/600.css";
+
+@theme {
+  --color-ink: #0B0B0C;
+  --color-crimson: #D4161F;
+  --color-deep-red: #5A0B0F;
+  --color-gold: #C9922B;
+  --color-paper: #F1E6D0;
+  --color-live-green: #3DDC84;
+
+  --font-display: "Anton", sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --shadow-comic: 6px 6px 0px #0B0B0C;
+  --shadow-comic-sm: 3px 3px 0px #0B0B0C;
+  --shadow-comic-gold: 6px 6px 0px #C9922B;
+  --shadow-comic-crimson: 6px 6px 0px #D4161F;
+  --shadow-comic-paper: 6px 6px 0px #F1E6D0;
+}
+
+:root {
+  --ink: #0B0B0C;
+  --crimson: #D4161F;
+  --deep-red: #5A0B0F;
+  --gold: #C9922B;
+  --paper: #F1E6D0;
+  --live-green: #3DDC84;
+}
+
+/* Base comic styles */
+body {
+  font-family: var(--font-body);
+  background-color: var(--ink);
+  color: var(--paper);
+  overflow-x: hidden;
+}
+
+/* Display font class */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.03em;
+}
+
+.font-mono-code {
+  font-family: var(--font-mono);
+}
+
+/* Comic hard offset shadows */
+.comic-shadow {
+  box-shadow: 6px 6px 0px var(--ink);
+}
+
+.comic-shadow-paper {
+  box-shadow: 6px 6px 0px var(--ink);
+}
+
+.comic-shadow-gold {
+  box-shadow: 6px 6px 0px var(--gold);
+}
+
+.comic-shadow-crimson {
+  box-shadow: 6px 6px 0px var(--crimson);
+}
+
+.comic-shadow-light {
+  box-shadow: 6px 6px 0px rgba(11, 11, 12, 0.4);
+}
+
+/* Comic card borders */
+.comic-card-ink {
+  border: 3px solid var(--gold);
+  border-radius: 2px;
+  background-color: var(--ink);
+  box-shadow: 6px 6px 0px var(--gold);
+}
+
+.comic-card-paper {
+  border: 3px solid var(--ink);
+  border-radius: 2px;
+  background-color: var(--paper);
+  box-shadow: 6px 6px 0px var(--ink);
+}
+
+/* Halftone / Comic grain pattern */
+.comic-grain {
+  background-image: radial-gradient(rgba(11, 11, 12, 0.12) 1px, transparent 0);
+  background-size: 8px 8px;
+}
+
+.comic-grain-dark {
+  background-image: radial-gradient(rgba(241, 230, 208, 0.08) 1px, transparent 0);
+  background-size: 8px 8px;
+}
+
+/* Global grain overlay: tiny pre-rendered 128px tiled PNG (no CPU SVG filters) */
+.grain-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  opacity: 0.045;
+  background-image: url("/assets/noise.png");
+  background-repeat: repeat;
+}
+
+/* Below-the-fold content-visibility optimization for 120 FPS scrolling */
+#builds,
+#work,
+#services,
+#toolbelt,
+#about,
+#contact {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 750px;
+}
+
+/* Accessible visible gold focus rings */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--gold) !important;
+  outline-offset: 3px !important;
+}
+
+/* Custom comic cursor on desktop */
+@media (pointer: fine) {
+  html.sling-cursor-active,
+  html.sling-cursor-active a,
+  html.sling-cursor-active button,
+  html.sling-cursor-active [role="button"],
+  html.sling-cursor-active [data-cursor] {
+    cursor: none !important;
+  }
+  html.sling-cursor-active input,
+  html.sling-cursor-active textarea,
+  html.sling-cursor-active [contenteditable="true"] {
+    cursor: auto !important;
+  }
+}
+
+@keyframes fadeWebStrands {
+  0% {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  60% {
+    transform: scale(1.15);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+/* SlingRingCursor Zero-Reflow CSS States */
+.sling-ring-container[data-tone="ink"] {
+  color: #C9922B;
+}
+.sling-ring-container[data-tone="paper"] {
+  color: #0B0B0C;
+}
+
+.sling-ring-body {
+  width: 36px;
+  height: 36px;
+}
+.sling-ring-container[data-cursor-state="link"] .sling-ring-body {
+  width: 64px;
+  height: 64px;
+}
+.sling-ring-container[data-cursor-state="play"] .sling-ring-body {
+  width: 48px;
+  height: 48px;
+}
+.sling-ring-container[data-cursor-state="view"] .sling-ring-body {
+  width: 52px;
+  height: 52px;
+}
+.sling-ring-container[data-cursor-state="hire"] .sling-ring-body {
+  width: 58px;
+  height: 58px;
+}
+.sling-ring-container[data-cursor-state="drag"] .sling-ring-body {
+  width: 48px;
+  height: 48px;
+}
+
+.sling-ring-container[data-cursor-state="play"] .sling-badge-play {
+  display: flex;
+}
+.sling-ring-container[data-cursor-state="hire"] .sling-badge-hire {
+  display: flex;
+}
+.sling-ring-container[data-cursor-state="view"] .sling-badge-view {
+  display: flex;
+}
+.sling-ring-container[data-cursor-state="link"] .sling-badge-link {
+  display: block;
+}
+.sling-ring-container[data-cursor-state="drag"] .sling-badge-drag {
+  display: block;
+}
+
+.sling-ring-container[data-pulsing="true"] .sling-ring-body {
+  transform: scale(1.25);
+}
+
+/* Comic diagonal slice utilities */
+.diagonal-cut-top {
+  clip-path: polygon(0 3.5vw, 100% 0, 100% 100%, 0 100%);
+  margin-top: -3.5vw;
+  padding-top: calc(3.5vw + 4rem);
+}
+
+.diagonal-cut-top-reverse {
+  clip-path: polygon(0 0, 100% 3.5vw, 100% 100%, 0 100%);
+  margin-top: -3.5vw;
+  padding-top: calc(3.5vw + 4rem);
+}
+
+@media (max-width: 640px) {
+  .diagonal-cut-top {
+    clip-path: polygon(0 16px, 100% 0, 100% 100%, 0 100%);
+    margin-top: -16px;
+    padding-top: calc(16px + 3rem);
+  }
+  .diagonal-cut-top-reverse {
+    clip-path: polygon(0 0, 100% 16px, 100% 100%, 0 100%);
+    margin-top: -16px;
+    padding-top: calc(16px + 3rem);
+  }
+}
